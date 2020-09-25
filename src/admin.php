@@ -92,12 +92,13 @@ if (isset($_POST['add'])) {
                 $oldtime = new DateTime($spelning->getDate());
                 $time = strftime('%e %B %H:%M', $oldtime->getTimestamp());
                 $time = ucwords($time);
+                $otheryear = $oldtime->format('Y');
         
                 if ($now < $oldtime) {      
-                    if ($currentyear !== $otheryear = $oldtime->format('Y')) {
-                        
-                        echo "<h3>Spelningar $otheryear:</h3>";
-                    }       
+                    if ($currentyear !== $otheryear) {
+                        echo "<h3>Spelningar $otheryear</h3>";
+                        $currentyear = $otheryear;
+                    }      
                     echo "<div class='spelning'>";
                     echo "<h3>" . $spelning->getTitle() . "</h3>";
                     echo "<p>" . $time . "<br>" . $spelning->getBody() . "</p>";
