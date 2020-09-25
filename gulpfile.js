@@ -11,25 +11,25 @@ const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
 
 const files = {
-    html: "src/**/*.html",
+    html: "src/**/*",
     css: "src/**/*.css",
     sass: "src/sass/*.scss",
     js: "src/**/*.js",
-    imgs: "src/**/*",
-    assets: "src/assets/*"
+    imgs: "src/imgs/*",
+    assets: "src/assets/*",
+    includes: "src/includes/*"
 }
 
 // Kopierar över HTML filer
 function copyhtml() {
     return src(files.html)
         .pipe(dest('pub'))
-        .pipe(browserSync.stream())
+        //.pipe(browserSync.stream())
 }
 
 // Kopierar över assets, tex fonter
 function copyAssets() {
-    return src(files.assets)
-    .pipe(dest('pub/assets'))
+    return src(files.assets).pipe(dest('pub/assets'))
 }
 
 // Minifiera och sammanslår JS
@@ -38,7 +38,7 @@ function minifyJS() {
         .pipe(concat("main.js"))
         .pipe(uglify())
         .pipe(dest('pub/js'))
-        .pipe(browserSync.stream())
+        //.pipe(browserSync.stream())
 }
 
 // Minifiera och sammanslå CSS
@@ -59,7 +59,7 @@ function minifyIMGS() {
         imagemin.optipng({optimizationLevel: 0})
     ]))
     .pipe(dest('pub'))
-    .pipe(browserSync.stream())
+    //.pipe(browserSync.stream())
 }
 
 // Tar bort pub mappen
@@ -75,18 +75,20 @@ function sassTask() {
     .pipe(sass()).on("error", sass.logError)
     .pipe(dest("pub/css"))
     .pipe(sourcemaps.write())
-    .pipe(browserSync.stream());
+    //.pipe(browserSync.stream());
 }
 
 // Watchtask som kollar efter förändringar
 function watchTask() {
+
+    /*
     browserSync.init({
         server: {
             baseDir: "./pub"
         }
-    });
+    });*/
 
-    watch([files.imgs], minifyIMGS);
+    //watch([files.imgs], minifyIMGS);
     watch([files.html], copyhtml);
     watch([files.js], minifyJS);
     //watch([files.css], minifyCSS);
@@ -96,7 +98,7 @@ function watchTask() {
 // Default task
 exports.default = series(
     clean,
-    parallel(copyhtml, minifyJS, minifyIMGS, sassTask, copyAssets),
+    parallel(copyhtml, minifyJS, sassTask, copyAssets),
     watchTask
 )
 
@@ -105,5 +107,5 @@ exports.sassTask = sassTask;
 exports.copyhtml = copyhtml;
 exports.minifyJS = minifyJS;
 //exports.minifyCSS = minifyCSS;
-exports.minifyIMGS = minifyIMGS;
+//exports.minifyIMGS = minifyIMGS;
 exports.copyAssets = copyAssets;

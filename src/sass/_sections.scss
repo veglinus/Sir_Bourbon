@@ -15,6 +15,9 @@ section:nth-of-type(odd) {
     h1 {
         margin-block-start: 0;
         padding-top: 0.67em;
+        a {
+            text-decoration: none;
+        }
     }
 }
 

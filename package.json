@@ -1,9 +1,8 @@
 {
-  "name": "Sir_Bourbon",
+  "name": "sir_bourbon",
   "version": "1.0.0",
-  "description": "",
+  "description": "Lösning av Linus Hvenfelt.",
   "main": "gulpfile.js",
-  "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.26.12",
     "del": "^5.1.0",
@@ -19,6 +18,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veglinus/Sir_Bourbon.git"
+  },
   "author": "Linus Hvenfelt",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veglinus/Sir_Bourbon/issues"
+  },
+  "homepage": "https://github.com/veglinus/Sir_Bourbon#readme"
 }

@@ -1,5 +1,3 @@
-console.log('Mainjs file');
-
 var form = document.getElementById("form")
 form.addEventListener("submit", wipeForm);
 
